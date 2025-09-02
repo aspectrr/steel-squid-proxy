@@ -36,5 +36,5 @@ docker compose up -d
 
 ### **TESTING LOCALLY**
 ```bash
-curl -x http://proxyuser:<password in step 4>@localhost:3128 https://www.google.com
+curl -x http://proxyuser:<password in step 4>@<ip address | localhost>:3128 https://www.google.com
 ```
