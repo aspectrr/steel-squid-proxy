@@ -1,0 +1,32 @@
+1. # Generate private key
+openssl genrsa -out squid.key 2048
+
+2. # Generate self-signed certificate (valid 1 year)
+openssl req -new -x509 -key squid.key -out squid.pem -days 365 \
+  -subj "/C=US/ST=<State>/L=<City>/O=<Org Name>/OU=IT/CN=<your-server-ip>"
+
+3. # Build image
+docker compose build
+
+4. # Create auth user "proxyuser", sometimes you have to look at the Docker image to find the name
+docker run --rm -it -v $(pwd)/squid/auth:/etc/squid/auth <image-name> \
+    htpasswd -c /etc/squid/auth/users proxyuser
+
+5. # Start the server
+docker compose up -d
+
+
+6. # Accessing
+  https://your-server-ip:3129
+	•	Username: proxyuser
+	•	Password: <password provided in step 4>
+
+	Add in the proxy field when creating a session on Steel.dev
+
+
+**TESTING LOCALLY**
+Set this in browser’s proxy settings
+  https://your-server-ip:3129
+	•	Username: proxyuser
+	•	Password: <password provided in step 4>
+To test: visit https://ifconfig.me → should show server’s IP.

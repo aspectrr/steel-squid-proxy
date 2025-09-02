@@ -1,0 +1,10 @@
+services:
+  squid:
+    build: ./squid
+    container_name: squid-proxy
+    ports:
+      - "3129:3129"
+    volumes:
+      - ./squid/auth:/etc/squid/auth
+      - ./squid/certs:/etc/squid/certs
+    restart: unless-stopped
