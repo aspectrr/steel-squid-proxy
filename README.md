@@ -35,8 +35,6 @@ docker compose up -d
 
 
 ### **TESTING LOCALLY**
-Set this in browser’s proxy settings \
-  https://your-server-ip:3129 \
-	•	Username: proxyuser \
-	•	Password: <password provided in step 4> \
-To test: visit https://ifconfig.me → should show server’s IP.
+```bash
+curl -x http://proxyuser:<password in step 4>@localhost:3128 https://www.google.com
+```
